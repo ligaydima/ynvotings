@@ -65,7 +65,7 @@ def index():
             if vot:
                 last_vote_by_poll[i.id] = vot.flag
     return render_template("index.html", polls=polls, votes_by_poll=votes_by_poll, last_vote_by_poll=last_vote_by_poll,
-                           title='Work log')
+                           title='Polls')
 
 
 @app.route('/logout')
@@ -114,7 +114,7 @@ def register():
         session.add(user)
         session.commit()
         return redirect('/login')
-    return render_template('register.html', title='Регистрация', form=form)
+    return render_template('register.html', title='Register', form=form)
 
 
 @app.route('/add_poll', methods=['GET', 'POST'])
