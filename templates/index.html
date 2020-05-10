@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-
 {% block content %}
 <meta charset="UTF-8">
 
-<h2 align="center">Works log</h2>
+<h2 align="center">All polls</h2>
 {% if current_user.is_authenticated %}
 <p align="justify">
     <a href="add_poll" class="btn btn-secondary">Create poll</a>
@@ -11,7 +10,7 @@
 {% for poll in polls %}
 <h3>Poll # {{ poll.id }}</h3>
 <div class="table_container">
-        {{ poll.description.capitalize() }}</td>
+        {{ poll.description.capitalize() }}
 </div>
 <br>
 YES: {{votes_by_poll[poll.id][0]}}
