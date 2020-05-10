@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+
+<h2 align="center">Works log</h2>
+{% if current_user.is_authenticated %}
+<p align="justify">
+    <a href="add_poll" class="btn btn-secondary">Create poll</a>
+{% endif %}
+{% for poll in polls %}
+<h3>Poll # {{ poll.id }}</h3>
+<div class="table_container">
+        {{ poll.description.capitalize() }}</td>
+</div>
+<br>
+YES: {{votes_by_poll[poll.id][0]}}
+<br>
+NO: {{votes_by_poll[poll.id][1]}}
+<br>
+{% if current_user.is_authenticated %}
+<div>
+    {% if current_user.id == poll.user_id or current_user.id == 1  %}
+    <a href="/polls/{{ poll.id }}" class="btn btn-warning">Edit poll</a>
+    <a href="/poll_delete/{{ poll.id }}" class="btn btn-danger">Delete poll</a>
+    {% endif %}
+    {% if poll.id in last_vote_by_poll %}
+    Вы проголосовали за {%if last_vote_by_poll[poll.id] %}YES{% else %} NO {%endif %}
+    {% endif %}
+    <a href="/vote/{{ poll.id }}?flag=1" class="btn btn-success">YES</a>
+    <a href="/vote/{{ poll.id }}?flag=0" class="btn btn-danger">NO</a>
+</div>
+{% endif %}
+{% endfor %}
+
+{% endblock %}
